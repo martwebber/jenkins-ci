@@ -11,19 +11,19 @@ pipeline {
     
         stage('Build') {
             steps {
-                echo 'building...'
+                echo "building..."
             }
         }
 
         stage('Docker hub login') {
             steps {
-                echo 'docker login'
+                echo "docker login"
             }
         }
     
         stage('Push Image') {
             steps {
-                echo 'push image...'
+                echo "push image..."
             }
         }
     }
