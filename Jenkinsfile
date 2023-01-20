@@ -1,5 +1,8 @@
 pipeline {
+
     agent any
+
+    stages {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']]])
@@ -8,25 +11,19 @@ pipeline {
     
         stage('Build') {
             steps {
-                echo 'docker build'
+                echo 'building...'
             }
         }
 
-        stage('Test') {
+        stage('Docker hub login') {
             steps {
-                echo 'Testing...'
-            }
-        }
-
-        stage('Push Image') {
-            steps {
-                echo 'Image puhed to docker hub'
+                echo 'docker login'
             }
         }
     
-        stage('Deploy to GKE') {
+        stage('Push Image') {
             steps {
-                echo 'Deploying to GKE...'
+                echo 'push image...'
             }
         }
     }
