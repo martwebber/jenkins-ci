@@ -5,12 +5,12 @@ pipeline {
     }
 
 
-    // stages {
-    //     stage('checkout') {
-    //         steps {
-    //             checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']])
-    //         }
-    //     }
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']])
+            }
+        }
 
     //                 //SonarQube analysis
     //                stage('SonarQube analysis') {
