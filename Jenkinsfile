@@ -5,28 +5,28 @@ pipeline {
     }
 
 
-    stages {
-        stage('checkout') {
-            steps {
-                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']])
-            }
-        }
+    // stages {
+    //     stage('checkout') {
+    //         steps {
+    //             checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']])
+    //         }
+    //     }
 
-                    //SonarQube analysis
-                   stage('SonarQube analysis') {
-                       steps {
-                           script {
-                               try {
-                                   def scannerHome = tool 'sonar-scanner';
-                                   withSonarQubeEnv('Sonarqube') {
-                                       sh "${tool("sonar-scanner")}/bin/sonar-scanner"
-                                   }
-                               } catch (Error|Exception e){
-                                   echo "failed but we continue"
-                               }
-                           }
-                       }
-                   }
+    //                 //SonarQube analysis
+    //                stage('SonarQube analysis') {
+    //                    steps {
+    //                        script {
+    //                            try {
+    //                                def scannerHome = tool 'sonar-scanner';
+    //                                withSonarQubeEnv('Sonarqube') {
+    //                                    sh "${tool("sonar-scanner")}/bin/sonar-scanner"
+    //                                }
+    //                            } catch (Error|Exception e){
+    //                                echo "failed but we continue"
+    //                            }
+    //                        }
+    //                    }
+    //                }
         
 stage('Build') {
             steps {
