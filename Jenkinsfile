@@ -23,7 +23,7 @@ stage('Build') {
                     withCredentials([string(credentialsId: 'DOCKERHUB_PASSWORD', variable: 'DOCKERHUB_PASSWORD')]) {
                     sh 'docker login -u martwebber -p ${DOCKERHUB_PASSWORD}'
 }
-                sh 'docker push martwebber/docker-repo:latest'
+                sh 'docker push martwebber/flask-app-test:latest'
 
                 }
             }
