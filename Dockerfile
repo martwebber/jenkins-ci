@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:20.04
 RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip
 RUN pip install -y flask
