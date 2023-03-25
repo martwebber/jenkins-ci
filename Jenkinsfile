@@ -1,21 +1,33 @@
 pipeline {
     agent any
+        environment{
+        DOCKERHUB_CREDENTIALS=credentials('DOCKERHUB_CREDENTIALS')
+    }
+
 
     stages {
-        stage('Build') {
+        stage('checkout') {
             steps {
-                echo 'Building..'
+                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/martwebber/jenkins-ci.git']])
             }
         }
-        stage('Test') {
+        
+stage('Build') {
             steps {
-                echo 'Testing..'
+                sh 'docker build -t martwebber/flask-app-test .'
             }
         }
-        stage('Deploy') {
+        stage('Push Image') {
             steps {
-                echo 'Deploying....'
+                script{
+                    withCredentials([string(credentialsId: 'DOCKERHUB_PASSWORD', variable: 'DOCKERHUB_PASSWORD')]) {
+                    sh 'docker login -u martwebber -p ${DOCKERHUB_PASSWORD}'
+}
+                sh 'docker push martwebber/docker-repo:latest'
+
+                }
             }
         }
+        
     }
 }
