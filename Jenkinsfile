@@ -12,21 +12,29 @@ pipeline {
             }
         }
 
-    //                 //SonarQube analysis
-    //                stage('SonarQube analysis') {
-    //                    steps {
-    //                        script {
-    //                            try {
-    //                                def scannerHome = tool 'sonar-scanner';
-    //                                withSonarQubeEnv('Sonarqube') {
-    //                                    sh "${tool("sonar-scanner")}/bin/sonar-scanner"
-    //                                }
-    //                            } catch (Error|Exception e){
-    //                                echo "failed but we continue"
-    //                            }
-    //                        }
-    //                    }
-    //                }
+//SonarQube analysis
+                    stage('SonarQube analysis') {
+                        steps {
+                            script {
+                                try {
+                                    def scannerHome = tool 'sonar-scanner';
+                                    withSonarQubeEnv('sonarqube') {
+                                        sh "${tool("sonar-scanner")}/bin/sonar-scanner"
+                                    }
+                                } catch (Error|Exception e){
+                                    echo "failed but we continue"
+                                }
+                            }
+                        }
+                    }
+
+           	// stage("Quality gate") {
+            //            steps {
+            //                waitForQualityGate abortPipeline: true
+            //            }
+            //        }
+
+            //    }
         
 stage('Build') {
             steps {
@@ -46,4 +54,5 @@ stage('Build') {
         }
         
     }
-}
+}                          
+                                
